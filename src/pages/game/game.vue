@@ -4,44 +4,28 @@
       <div v-bind:style="loadingStyle"></div>
       <div>{{loadingStyle.width}}</div>
     </div>
-    <choice v-if="choicing" @choice="text"></choice>
-    <div class="plotChoice">
-      <div class="Plot">剧情</div>
-      <div class="choiceButton">
-        <div class="choiceLeft">
-          <transition name="button1">
-            <button id="choice1" v-if="">选项1</button>
-          </transition>
-          <transition name="button2">
-            <button id="choice2" v-if="">选项2</button>
-          </transition>
-        </div>
-        <div class="choiceRight">
-          <transition name="button3">
-            <button id="choice3" v-if="">选项3</button>
-          </transition>
-          <transition name="button4">
-            <button id="choice4" v-if="">选项4</button>
-          </transition>
-        </div>
-      </div>
-    </div>
-    <div class="onlyPlot">
-      <div class="centerPlot">剧情</div>
-    </div>
+    <choice v-if="choicing" @choiceOccupational="choiceOccupational"></choice>
+    <plot-choice v-show="plotChoiceShow" :i="i" @showPlot="choiceOption"></plot-choice>
+    <plot v-show="plotShow" :i="i" @clickPlot="clickPlot"></plot>
   </div>
 </template>
 
 <script>
   import choice from '../../components/choice'
+  import plotChoice from '../../components/plot_choice'
+  import plot from '../../components/plot'
+
   export default {
     name: 'App',
 
-    components: {choice},
+    components: {choice, plotChoice, plot},
 
     data: function () {
       return {
         choicing: 0,
+        i: 0,
+        plotChoiceShow: false,
+        plotShow: false,
         pictures: [
           'page1',
           'page2',
@@ -86,8 +70,20 @@
       },
 
     methods: {
-      text: function () {
-        alert('qq')
+      choiceOccupational: function (i) {
+        this.i = i
+        this.choicing = false
+        this.plotChoiceShow = true
+      },
+
+      choiceOption: function () {
+        this.plotChoiceShow = false
+        this.plotShow = true
+      },
+
+      clickPlot: function () {
+        this.plotShow = false
+        this.plotChoiceShow = true
       }
     }
 }
@@ -108,6 +104,12 @@
     margin: 0;
   }
 
+  #fullScreen {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+  }
+
   #app {
     width: 100%;
     height: 100%;
@@ -117,57 +119,5 @@
     width: 50%;
     height: 20%;
     margin: 20% auto 0;
-  }
-
-  .plotChoice, .onlyPlot{
-    position: relative;
-    height: 100%;
-    width: 100%;
-  }
-
-  .choiceButton {
-    position: absolute;
-    transform:translate(-50%, 0);
-    width: 50%;
-    bottom: 0;
-    left: 50%;
-    overflow: hidden;
-    height: 30%;
-  }
-
-  #choice1, #choice2 {
-    float: left;
-  }
-
-  .choiceLeft, .choiceRight{
-    height: 100%;
-    width: 50%;
-    float: left;
-  }
-
-  #choice3, #choice4 {
-    float: right;
-  }
-
-  #choice1 , #choice2, #choice3, #choice4 {
-    width: 60%;
-    margin: 10%;
-  }
-
-  .Plot {
-    position: absolute;
-    top: 10%;
-    left: 50%;
-    transform:translate(-50%, 0);
-    width: 50%;
-    height: 30%;
-    text-align: center;
-  }
-
-  .centerPlot {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform:translate(-50%, -50%);
   }
 </style>

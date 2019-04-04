@@ -6,7 +6,7 @@
     <div id="button3" @click="openModel(2)"></div>
     <div id="button4" @click="openModel(3)"></div>
     <div id="button5" @click="openModel(4)"></div>
-    <model :message = message[i] :show="show" @close="closeModel"></model>
+    <model :message = message[i] :show="show" @close="closeModel" @choice="choiceOccupational"></model>
   </div>
 </template>
 
@@ -35,6 +35,11 @@
 
       closeModel: function () {
         this.show = false
+      },
+
+      choiceOccupational: function () {
+        this.$emit('choiceOccupational', this.i)
+        this.show = false
       }
     }
   }
@@ -47,14 +52,6 @@
     height: 100%;
     width: 100%;
   }
-
-  #fullScreen {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-  }
-
-
 
   #button1 {
     position: absolute;
