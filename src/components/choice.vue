@@ -1,13 +1,15 @@
 <template>
-  <div class="choice">
-    <img id="fullScreen" src="http://wx1.sinaimg.cn/mw690/005JHgrHgy1g1olrebrjij31120kujvj.jpg" alt="背景"/>
-    <div id="button1" @click="openModel(0)"></div>
-    <div id="button2" @click="openModel(1)"></div>
-    <div id="button3" @click="openModel(2)"></div>
-    <div id="button4" @click="openModel(3)"></div>
-    <div id="button5" @click="openModel(4)"></div>
-    <model :message = message[i] :show="show" @close="closeModel" @choice="choiceOccupational"></model>
-  </div>
+  <transition name="choice">
+    <div class="choice">
+      <img id="fullScreen" src="http://wx1.sinaimg.cn/mw690/005JHgrHgy1g1olrebrjij31120kujvj.jpg" alt="背景"/>
+      <div id="button1" @click="openModel(0)"></div>
+      <div id="button2" @click="openModel(1)"></div>
+      <div id="button3" @click="openModel(2)"></div>
+      <div id="button4" @click="openModel(3)"></div>
+      <div id="button5" @click="openModel(4)"></div>
+      <model :message = message[i] :show="show" @close="closeModel" @choice="choiceOccupational"></model>
+    </div>
+  </transition>
 </template>
 
 <script>
@@ -93,5 +95,11 @@
     height: 12%;
   }
 
+  .choice-enter-active, .choice-leave-active {
+    transition: opacity 1.5s;
+  }
+  .choice-enter, .choice-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+  }
 
 </style>

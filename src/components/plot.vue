@@ -1,14 +1,16 @@
 <template>
-  <div class="onlyPlot" @click="clickPlot">
-    <div class="centerPlot">{{showPlot[progress]}}</div>
-  </div>
+  <transition name="onlyPlot">
+    <div class="onlyPlot" @click="clickPlot">
+      <div class="centerPlot">{{showPlot[progress]}}</div>
+    </div>
+  </transition>
 </template>
 
 <script>
   export default {
     name: 'plot',
 
-    props: ['i'],
+    props: ['i', 'discouraged'],
 
     data: function () {
       return {
@@ -40,7 +42,13 @@
     methods: {
       clickPlot: function () {
         this.$emit('clickPlot')
-        this.progress++
+        if (this.discouraged === true) {
+          this.$emit('discouraged')
+        }
+        // 多50ms防止文字突变
+        setTimeout(() => {
+          this.progress++
+        }, 1550)
       }
     }
   }
@@ -58,5 +66,16 @@
     left: 50%;
     top: 50%;
     transform:translate(-50%, -50%);
+  }
+
+  .onlyPlot-enter-active {
+    transition: opacity 1.5s;
+  }
+
+  .onlyPlot-leave-active {
+    transition: opacity 1.5s;
+  }
+  .onlyPlot-enter, .onlyPlot-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
   }
 </style>

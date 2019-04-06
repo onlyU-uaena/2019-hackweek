@@ -2,11 +2,12 @@
   <div id="app">
     <div class="loading" v-if="loading !== 6">
       <div v-bind:style="loadingStyle"></div>
-      <div>{{loadingStyle.width}}</div>
+      <div>{{loadingProgress}}</div>
     </div>
     <choice v-if="choicing" @choiceOccupational="choiceOccupational"></choice>
-    <plot-choice v-show="plotChoiceShow" :i="i" @showPlot="choiceOption"></plot-choice>
-    <plot v-show="plotShow" :i="i" @clickPlot="clickPlot"></plot>
+    <plot-choice v-if="plotChoiceIf" v-show="plotChoiceShow" :i="i" @showPlot="choiceOption" @gamePoint="checkDiscouraged"></plot-choice>
+    <plot v-if="PlotIf" v-show="plotShow" :i="i" :discouraged="discouraged" @discouraged="BeenDiscouraged" @clickPlot="clickPlot"></plot>
+    <discouraged v-show="discouragedShow"></discouraged>
   </div>
 </template>
 
@@ -14,18 +15,23 @@
   import choice from '../../components/choice'
   import plotChoice from '../../components/plot_choice'
   import plot from '../../components/plot'
+  import discouraged from '../../components/discouraged'
 
   export default {
     name: 'App',
 
-    components: {choice, plotChoice, plot},
+    components: {choice, plotChoice, plot, discouraged},
 
     data: function () {
       return {
         choicing: 0,
-        i: 0,
+        i: '',
+        plotChoiceIf: false,
+        PlotIf: false,
         plotChoiceShow: false,
         plotShow: false,
+        discouragedShow: false,
+        discouraged: false,
         pictures: [
           'page1',
           'page2',
@@ -47,7 +53,8 @@
           width: 0,
           height: '20px',
           backgroundColor: 'yellow'
-        }
+        },
+        loadingProgress: 0
       }
     },
 
@@ -60,6 +67,8 @@
             if (this.pictures[i].complete) {
               this.loading++
               this.loadingStyle.width = (this.loading / this.pictures.length) * 100 + '%'
+              let progress = (this.loading / this.pictures.length) * 100
+              this.loadingProgress = progress.toFixed(0) + '%'
               if (this.loading === 6) {
                 this.choicing = true
               }
@@ -73,12 +82,29 @@
       choiceOccupational: function (i) {
         this.i = i
         this.choicing = false
+        this.plotChoiceIf = true
+        this.PlotIf = true
         this.plotChoiceShow = true
       },
 
       choiceOption: function () {
         this.plotChoiceShow = false
-        this.plotShow = true
+        setTimeout(() => {
+          this.plotShow = true
+        }, 3000)
+      },
+
+      checkDiscouraged: function (gamePoint) {
+        if (gamePoint < 49) {
+          this.discouraged = true
+        }
+      },
+
+      BeenDiscouraged: function () {
+        this.plotChoiceShow = false
+        setTimeout(() => {
+          this.discouragedShow = true
+        }, 1500)
       },
 
       clickPlot: function () {

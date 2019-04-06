@@ -1,15 +1,17 @@
 <template>
-  <div v-show="show" class="background">
-    <div class="content">
-      <div class="contentHead">
-        <p class="close" @click="close">x</p>
-      </div>
-      <div class="contentBody">{{message}}</div>
-      <div class="contentFoot">
-        <p @click="choice">确认选择</p>
+  <transition name="model">
+    <div v-show="show" class="background">
+      <div class="content">
+        <div class="contentHead">
+          <p class="close" @click="close">x</p>
+        </div>
+        <div class="contentBody">{{message}}</div>
+        <div class="contentFoot">
+          <p @click="choice">确认选择</p>
+        </div>
       </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script>
@@ -58,6 +60,14 @@
   }
 
   .contentBody {
+  }
+
+  .model-enter-active {
+    transition: opacity 1.5s;
+  }
+
+  .model-enter, .model-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
   }
 
 </style>

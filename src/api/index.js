@@ -1,5 +1,5 @@
-import Axios from 'axios'
+import axios from 'axios'
 
-export let instance = Axios.create({
+export let instance = axios.create({
   baseURL: ''
 })
