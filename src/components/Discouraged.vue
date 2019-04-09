@@ -1,6 +1,6 @@
 <template>
   <transition name="discouraged">
-    <p>劝退页</p>
+    <div class="discouraged">劝退页</div>
   </transition>
 </template>
 
@@ -12,6 +12,12 @@
 
 <style scoped>
 
+  .discouraged {
+    position: relative;
+    height: 100%;
+    width: 100%;
+  }
+
   .discouraged-enter-active {
     transition: opacity 1.5s;
   }
@@ -19,7 +25,7 @@
   .discouraged-leave-active {
     transition: opacity 1.5s;
   }
-  .discouraged-enter, .discouraged-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  .discouraged-enter, .discouraged-leave-to {
     opacity: 0;
   }
 

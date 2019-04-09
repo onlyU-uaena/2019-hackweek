@@ -1,7 +1,7 @@
 <template>
   <transition name="onlyPlot">
     <div class="onlyPlot" @click="clickPlot">
-      <div class="centerPlot">{{showPlot[progress]}}</div>
+      <img v-bind:src="showPlot[progress]" id="fullScreen"  alt="情节"/>
     </div>
   </transition>
 </template>
@@ -10,17 +10,36 @@
   export default {
     name: 'plot',
 
-    props: ['i', 'discouraged'],
+    props: ['i', 'discouraged', 'progress'],
 
     data: function () {
       return {
-        progress: 0,
         showPlot: '',
-        plot0: ['情节1', '情节2'],
+        plot0:
+        ['http://wx2.sinaimg.cn/mw690/005JHgrHgy1g1wqnxntomj31120kun1y.jpg',
+          'http://wx1.sinaimg.cn/mw690/005JHgrHgy1g1wqnxc7hzj31120kuafz.jpg',
+          'http://wx4.sinaimg.cn/mw690/005JHgrHgy1g1wqnxyn16j31120kutcw.jpg',
+          'http://wx4.sinaimg.cn/mw690/005JHgrHgy1g1wqnz0ps8j31120kujvx.jpg',
+          'http://wx1.sinaimg.cn/mw690/005JHgrHgy1g1wqnzo9ufj31120kuaee.jpg',
+          '',
+          '',
+          'http://wx1.sinaimg.cn/mw690/005JHgrHgy1g1wqnzyfjuj31120ku0x4.jpg',
+          'http://wx1.sinaimg.cn/mw690/005JHgrHgy1g1wqo0hsysj31120kuae6.jpg',
+          'http://wx1.sinaimg.cn/mw690/005JHgrHgy1g1wqo0zaxcj31120kujv9.jpg'],
         plot1: ['情节1', '情节2'],
         plot2: ['情节1', '情节2'],
         plot3: ['情节1', '情节2'],
-        plot4: ['情节1', '情节2']
+        plot4:
+        ['http://wx2.sinaimg.cn/mw690/005JHgrHgy1g1wqnxntomj31120kun1y.jpg',
+          'http://wx1.sinaimg.cn/mw690/005JHgrHgy1g1wqnxc7hzj31120kuafz.jpg',
+          'http://wx4.sinaimg.cn/mw690/005JHgrHgy1g1wqnxyn16j31120kutcw.jpg',
+          'http://wx4.sinaimg.cn/mw690/005JHgrHgy1g1wqnz0ps8j31120kujvx.jpg',
+          'http://wx1.sinaimg.cn/mw690/005JHgrHgy1g1wqnzo9ufj31120kuaee.jpg',
+          '',
+          '',
+          'http://wx1.sinaimg.cn/mw690/005JHgrHgy1g1wqnzyfjuj31120ku0x4.jpg',
+          'http://wx1.sinaimg.cn/mw690/005JHgrHgy1g1wqo0hsysj31120kuae6.jpg',
+          'http://wx1.sinaimg.cn/mw690/005JHgrHgy1g1wqo0zaxcj31120kujv9.jpg']
       }
     },
 
@@ -45,10 +64,6 @@
         if (this.discouraged === true) {
           this.$emit('discouraged')
         }
-        // 多50ms防止文字突变
-        setTimeout(() => {
-          this.progress++
-        }, 1550)
       }
     }
   }

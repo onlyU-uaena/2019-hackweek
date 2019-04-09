@@ -2,6 +2,7 @@
   <transition name="choice">
     <div class="choice">
       <img id="fullScreen" src="http://wx1.sinaimg.cn/mw690/005JHgrHgy1g1olrebrjij31120kujvj.jpg" alt="背景"/>
+      <img src="../assets/xiaojiayuan.png" id="move" alt="小家园" />
       <div id="button1" @click="openModel(0)"></div>
       <div id="button2" @click="openModel(1)"></div>
       <div id="button3" @click="openModel(2)"></div>
@@ -14,6 +15,7 @@
 
 <script>
   import model from './model'
+  import {TweenLite} from 'gsap/TweenMax'
   export default {
     name: 'choice',
 
@@ -31,8 +33,43 @@
 
     methods: {
       openModel: function (i) {
-        this.i = i
-        this.show = true
+        switch (i) {
+          case 0:
+            TweenLite.to('#move', 2, {left: '10%'})
+            setTimeout(() => {
+              this.i = i
+              this.show = true
+            }, 2000)
+            break
+          case 1:
+            TweenLite.to('#move', 2, {left: '24%'})
+            setTimeout(() => {
+              this.i = i
+              this.show = true
+            }, 2000)
+            break
+          case 2:
+            TweenLite.to('#move', 2, {left: '40%'})
+            setTimeout(() => {
+              this.i = i
+              this.show = true
+            }, 2000)
+            break
+          case 3:
+            TweenLite.to('#move', 2, {left: '53%'})
+            setTimeout(() => {
+              this.i = i
+              this.show = true
+            }, 2000)
+            break
+          case 4:
+            TweenLite.to('#move', 2, {left: '64%'})
+            setTimeout(() => {
+              this.i = i
+              this.show = true
+            }, 2000)
+            break
+        }
       },
 
       closeModel: function () {
@@ -93,6 +130,14 @@
     left: 73%;
     width: 5%;
     height: 12%;
+  }
+
+  #move {
+    position: absolute;
+    top: 56%;
+    left: 5%;
+    width: 10%;
+    height: 30%;
   }
 
   .choice-enter-active, .choice-leave-active {

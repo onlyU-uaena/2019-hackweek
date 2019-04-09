@@ -62,7 +62,7 @@
   .contentBody {
   }
 
-  .model-enter-active {
+  .model-enter-active, .model-leave-active {
     transition: opacity 1.5s;
   }
 

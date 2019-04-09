@@ -4,7 +4,7 @@
       <label>昵称
         <input placeholder="请输入昵称" v-model="msg"/>
       </label>
-      <button href="game.html" @click="play">进入游戏</button>
+      <button @click="play">进入游戏</button>
     </div>
   </div>
 </template>
@@ -23,18 +23,16 @@
 
     created: function () {
       this.audio = document.createElement('audio')
-      this.audio.setAttribute('src', 'https://www.w3cschool.cn/statics/demosource/horse.ogg')
+      this.audio.setAttribute('src', 'http://s128.xiami.net/439/85439/423508/1770009616_1986471_l.mp3?ccode=xiami__&expire=86400&duration=266&psid=5ba9b0e976847aecc877848999246dd4&ups_client_netip=null&ups_ts=1554798810&ups_userid=0&utid=&vid=1770009616&fn=1770009616_1986471_l.mp3&vkey=B276a3a64c563f5ac9b947ba8a8180111')
     },
 
     methods: {
       send: function () {
-        this.$http.post('', {
+        this.$http.post('/upload', {
           name: this.msg
         })
           .then(function (res) {
-            if (res) {
-              index
-            }
+            console.log(res)
           })
           .catch(function (err) {
             console.log(err)
