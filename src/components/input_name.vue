@@ -47,10 +47,10 @@
 </script>
 
 <style scoped>
-  .inputName-enter-active {
+  .inputName-enter-active, .inputName-leave-active{
     transition: opacity 1.5s;
   }
-  .inputName-enter /* .fade-leave-active below version 2.1.8 */ {
+  .inputName-enter, .inputName-leave-to /* .fade-leave-active below version 2.1.8 */ {
     opacity: 0;
   }
 </style>

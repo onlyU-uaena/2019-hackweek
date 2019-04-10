@@ -8,7 +8,7 @@
     <choice v-show="choicing" @choiceOccupational="choiceOccupational"></choice>
     <first-plot v-show="firstPlotShow" v-if="firstPlotIf" :i="i" @close="firstPlotClose"></first-plot>
     <plot-choice v-if="plotChoiceIf" v-show="plotChoiceShow" :i="i" @showPlot="choiceOption" @gamePoint="checkDiscouraged"></plot-choice>
-    <plot v-if="PlotIf" v-show="plotShow" :i="i" :progress="progress" :discouraged="discouraged" @discouraged="BeenDiscouraged" @clickPlot="clickPlot"></plot>
+    <plot v-if="plotIf" v-show="plotShow" :i="i" :progress="progress" :discouraged="discouraged" @discouraged="BeenDiscouraged" @clickPlot="clickPlot"></plot>
     <discouraged v-show="discouragedShow"></discouraged>
   </div>
 </template>
@@ -34,7 +34,7 @@
         firstPlotShow: false,
         firstPlotIf: false,
         plotChoiceIf: false,
-        PlotIf: false,
+        plotIf: false,
         plotChoiceShow: false,
         plotShow: false,
         discouragedShow: false,
@@ -71,7 +71,7 @@
       function () {
         for (let i = 0; i < this.pictures.length; i++) {
           this.audio = document.createElement('audio')
-          this.audio.setAttribute('src', 'http://s128.xiami.net/439/85439/423508/1770009616_1986471_l.mp3?ccode=xiami__&expire=86400&duration=266&psid=5ba9b0e976847aecc877848999246dd4&ups_client_netip=null&ups_ts=1554798810&ups_userid=0&utid=&vid=1770009616&fn=1770009616_1986471_l.mp3&vkey=B276a3a64c563f5ac9b947ba8a8180111')
+          this.audio.setAttribute('src', 'http://file3.data.weipan.cn/122549903/1e1f6e3fa9f2e56c88b96e7a7f1874807b13ad48?ip=1554892275,115.152.115.127&ssig=pI6%2FsuXe0h&Expires=1554892875&KID=sae,l30zoo1wmz&se_ip_debug=115.152.115.127&from=1221134')
           this.audio.play()
           this.pictures[i] = new Image()
           this.pictures[i].src = this.picturesSrc[i]
@@ -95,44 +95,54 @@
         this.i = i
         this.firstPlotIf = true
         this.plotChoiceIf = true
-        this.PlotIf = true
-        this.firstPlotShow = true
+        this.plotIf = true
+        setTimeout(() => {
+          this.firstPlotShow = true
+        }, 1500)
         this.choicing = false
       },
 
       firstPlotClose: function () {
-        this.plotChoiceShow = true
+        setTimeout(() => {
+          this.plotChoiceShow = true
+        }, 1500)
         this.firstPlotShow = false
       },
 
       choiceOption: function (progress) {
         this.plotChoiceShow = false
-        this.progress += progress
+        this.progress = progress
         setTimeout(() => {
           this.plotShow = true
         }, 1500)
       },
 
       checkDiscouraged: function (gamePoint) {
-        if (gamePoint < 49) {
+        if (gamePoint < 48) {
           this.discouraged = true
         }
       },
 
       BeenDiscouraged: function () {
-        this.plotChoiceShow = false
+        this.plotChoiceIf = false
+        this.PlotShow = false
         setTimeout(() => {
           this.discouragedShow = true
+          this.plotIf = false
         }, 1500)
       },
 
       clickPlot: function () {
         this.plotShow = false
-        this.plotChoiceShow = true
+        setTimeout(() => {
+          this.plotChoiceShow = true
+        }, 1500)
       },
 
       inputComplete: function () {
-        this.choicing = true
+        setTimeout(() => {
+          this.choicing = true
+        }, 1500)
         this.inputShow = false
       }
     }
