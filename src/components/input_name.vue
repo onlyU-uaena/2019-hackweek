@@ -1,10 +1,10 @@
 <template>
   <transition name="inputName">
     <div class="inputName">
-      <label>昵称
-        <input placeholder="请输入昵称" v-model="msg"/>
-      </label>
-      <button @click="send">进入游戏</button>
+      <img id="fullScreen" src="http://wx2.sinaimg.cn/large/005JHgrHgy1g1yoivwrdlj31120kuk3i.jpg" alt="背景"/>
+      <img class="input" src="../assets/input.png" alt="输入"/>
+      <label for="inputName"></label><input id="inputName" placeholder="请输入用户昵称" v-model="msg"/>
+      <div class="enter" @click="send"></div>
     </div>
   </transition>
 </template>
@@ -19,11 +19,6 @@
         index: true,
         audio: ''
       }
-    },
-
-    created: function () {
-      this.audio = document.createElement('audio')
-      this.audio.setAttribute('src', '')
     },
 
     methods: {
@@ -50,7 +45,44 @@
   .inputName-enter-active, .inputName-leave-active{
     transition: opacity 1.5s;
   }
+
   .inputName-enter, .inputName-leave-to /* .fade-leave-active below version 2.1.8 */ {
     opacity: 0;
+  }
+
+  #inputName::-webkit-input-placeholder {
+    color: #cecece;
+  }
+
+  #inputName {
+    position: absolute;
+    left: 50%;
+    transform:translate(-50%, 0);
+    top: 52.7%;
+    width: 47%;
+    height: 10%;
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    outline: none;
+    font-size: 30px;
+    font-weight: 600;
+  }
+
+  .input {
+    position: absolute;
+    left: 50%;
+    transform:translate(-50%, 0);
+    top: 48%;
+    width: 54%;
+    height: 18%;
+  }
+
+  .enter {
+    position: absolute;
+    left: 50%;
+    transform:translate(-50%, 0);
+    top: 69%;
+    width: 21.5%;
+    height: 17%;
   }
 </style>

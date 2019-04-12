@@ -1,7 +1,7 @@
 <template>
   <transition name="firstPlot">
     <div class="firstPlot" @click="close">
-      <img id="fullScreen" src="http://wx4.sinaimg.cn/mw690/005JHgrHgy1g1whrfn2dej31120kudll.jpg" alt="firstPlot"/>
+      <img id="fullScreen" src="http://wx4.sinaimg.cn/large/005JHgrHgy1g1whrfn2dej31120kudll.jpg" alt="firstPlot"/>
       <div class="msg"><p>恭喜你，在一轮笔试和两轮面试中过关斩将，成为家园工作室{{msg}}的一员!</p></div>
     </div>
   </transition>

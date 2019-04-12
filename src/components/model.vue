@@ -2,13 +2,9 @@
   <transition name="model">
     <div v-show="show" class="background">
       <div class="content">
-        <div class="contentHead">
-          <p class="close" @click="close">x</p>
-        </div>
-        <div class="contentBody">{{message}}</div>
-        <div class="contentFoot">
-          <p @click="choice">确认选择</p>
-        </div>
+        <img id="enter" @click="choice" src="../assets/enter.png" alt="确认"/>
+        <img id="cancel" @click="close" src="../assets/cancel.png" alt="取消"/>
+        <img :src="picturesSrc[i]" class="modelContent" alt="模态框"/>
       </div>
     </div>
   </transition>
@@ -18,13 +14,17 @@
   export default {
     name: 'model',
 
-    components: {},
-
-    props: ['show', 'message'],
+    props: ['show', 'i'],
 
     data: function () {
       return {
-
+        picturesSrc: [
+          '../../static/development.png',
+          '../../static/products.png',
+          '../../static/operation.png',
+          '../../static/administrative.png',
+          '../../static/design.png'
+        ]
       }
     },
 
@@ -51,15 +51,32 @@
   }
 
   .content {
-    background-color: #fff;
-    box-shadow: 2px 2px 20px 1px;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform:translate(-50%, -50%);
+    height: 100%;
   }
 
-  .contentBody {
+  #enter, #cancel {
+    z-index: 100;
+    position: absolute;
+    width: 5%;
+    height: 10%;
+    left: 75%;
+    top: 34%;
+    box-shadow: 2px 2px 3px #888888;
+  }
+
+  #cancel {
+    left: 65%;
+    width: 5.5%;
+    height: 10.5%;
+  }
+
+  .modelContent {
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    top: 50%;
+    left: 50%;
+    transform:translate(-50%, -50%);
   }
 
   .model-enter-active, .model-leave-active {
