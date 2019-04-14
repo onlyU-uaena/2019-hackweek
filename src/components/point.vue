@@ -22,6 +22,7 @@
 
 <script>
   import axios from 'axios'
+  import qs from 'qs'
 
   export default {
     name: 'Point',
@@ -49,7 +50,7 @@
           case 4: this.group = '设计'
             break
         }
-        axios.post('http://localhost:6000/api/ranking', {
+        axios.post('http://localhost:8000/api/ranking', {
           group: this.group,
           score: this.gamePoint,
           userName: this.userName
@@ -57,14 +58,19 @@
           {
             headers: {
               'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-            }
+            },
+            transformRequest: [function (data) {
+              data = qs.stringify(data)
+              return data
+            }]
           })
           .then((res) => {
             this.lists = res.data
             console.log(res)
           })
-          .catch(function (res) {
-            console.log(res)
+          .catch(function (err) {
+            console.log(err)
+            throw new Error(err)
           })
       },
   

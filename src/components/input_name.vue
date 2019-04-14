@@ -14,6 +14,7 @@
 
 <script>
   import axios from 'axios'
+  import qs from 'qs'
 
   export default {
     name: 'input_name',
@@ -34,7 +35,11 @@
           {
             headers: {
               'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-            }
+            },
+            transformRequest: [function (data) {
+              data = qs.stringify(data)
+              return data
+            }]
           })
           .then((res) => {
             console.log(res)

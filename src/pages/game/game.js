@@ -4,7 +4,7 @@ import Vue from 'vue'
 import game from './game.vue'
 import router from './router/game'
 import {instance} from '../../api/index'
-import lottie from 'vue-lottie';
+import lottie from 'vue-lottie'
 
 Vue.config.productionTip = false
 Vue.prototype.$http = instance
