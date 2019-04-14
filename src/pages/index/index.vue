@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    logo
+    <img id="fullScreen" src="http://image.uczzd.cn/5343954532419927661.jpg?id=0&from=export" alt="横屏"/>
+    <h1 class="content">请横屏体验该游戏</h1>
   </div>
 </template>
 
@@ -16,7 +17,7 @@
     created: function () {
       setTimeout(() => {
         window.open('game.html', '_self')
-      }, 5000)
+      }, 3000)
     },
 
     methods: {
@@ -26,13 +27,18 @@
 </script>
 
 <style>
-  #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    margin-top: 60px;
+  #fullScreen {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform:translate(-50%, -50%);
+  }
+
+  .content {
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform:translate(-50%, 0);
   }
 
   h1, h2 {

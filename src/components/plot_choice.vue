@@ -18,7 +18,12 @@
         <button @click="progressAdd(showMassage[progress].point[1], showMassage[progress].progress[1])" id="designThreeChoice2">{{showMassage[progress].options[1]}}</button>
         <button @click="progressAdd(showMassage[progress].point[2], showMassage[progress].progress[2])" id="designThreeChoice3">{{showMassage[progress].options[2]}}</button>
       </div>
-      <div class="choiceButton3" v-if="(showMassage[progress].options.length === 3) && (i !== 4)">
+      <div class="developChoiceButton3" v-if="(showMassage[progress].options.length === 3) && (i === 0)">
+        <button @click="progressAdd(showMassage[progress].point[0], showMassage[progress].progress[0])" id="developThreeChoice1">{{showMassage[progress].options[0]}}</button>
+        <button @click="progressAdd(showMassage[progress].point[1], showMassage[progress].progress[1])" id="developThreeChoice2">{{showMassage[progress].options[1]}}</button>
+        <button @click="progressAdd(showMassage[progress].point[2], showMassage[progress].progress[2])" id="developThreeChoice3">{{showMassage[progress].options[2]}}</button>
+      </div>
+      <div class="choiceButton3" v-if="(showMassage[progress].options.length === 3) && (i !== 4) && (i !== 0)">
         <button @click="progressAdd(showMassage[progress].point[0], showMassage[progress].progress[0])" id="threeChoice1">{{showMassage[progress].options[0]}}</button>
         <button @click="progressAdd(showMassage[progress].point[1], showMassage[progress].progress[1])" id="threeChoice2">{{showMassage[progress].options[1]}}</button>
         <button @click="progressAdd(showMassage[progress].point[2], showMassage[progress].progress[2])" id="threeChoice3">{{showMassage[progress].options[2]}}</button>
@@ -170,6 +175,14 @@
             progress: [0, 1, 2],
             point: [2, 2, 2],
             continue: false
+          },
+          {
+            options: [],
+            plotChoice: '有人喜欢正流行、也有的偏爱冷门。但对于运营们来说，只要发现了足够优质的内容，无论大众小众，都想诚挚安利给用户。',
+            picturesSrc: 'http://wx1.sinaimg.cn/large/005JHgrHgy1g1xt790lsaj31120kuwpg.jpg',
+            progress: [],
+            point: [],
+            continue: true
           },
           {
             options: ['A：P图达人本人，自己做', 'B：虽然平时都用美图秀秀，但还是试试看', 'C：找设计组寻求帮助'],
@@ -492,6 +505,14 @@
     overflow: hidden;
   }
 
+  .developChoiceButton3 {
+    position: absolute;
+    width: 50%;
+    top: 5%;
+    right: 0;
+    overflow: hidden;
+  }
+
   #threeChoice1, #threeChoice2, #threeChoice3 {
     width: 85%;
     background-color: rgba(0, 0, 0, 0.5);
@@ -518,6 +539,19 @@
     color: white;
   }
 
+  #developThreeChoice1, #developThreeChoice2, #developThreeChoice3 {
+    float: right;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 12px;
+    border:5px solid #ffc674;
+    margin: 1% 0;
+    height: 90px;
+    font-size: 30px;
+    font-weight: 500;
+    color: white;
+  }
+
   #twoChoice1, #twoChoice2 {
     width: 80%;
     background-color: rgba(0, 0, 0, 0.5);
@@ -531,14 +565,27 @@
   }
 
   .plotChoice-enter-active {
-    transition: opacity 1.5s;
+    transition: opacity 1.0s;
+    animation: bounce-in 1.0s;
   }
 
   .plotChoice-leave-active {
-    transition: opacity 1.5s;
+    transition: opacity 1.0s;
   }
 
   .plotChoice-enter, .plotChoice-leave-to /* .fade-leave-active below version 2.1.8 */ {
     opacity: 0;
+  }
+
+  @keyframes bounce-in {
+    0% {
+      transform: scale(0);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+    100% {
+      transform: scale(1);
+    }
   }
 </style>

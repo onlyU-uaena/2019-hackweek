@@ -2,14 +2,19 @@
   <transition name="inputName">
     <div class="inputName">
       <img id="fullScreen" src="http://wx2.sinaimg.cn/large/005JHgrHgy1g1yoivwrdlj31120kuk3i.jpg" alt="背景"/>
-      <img class="input" src="../assets/input.png" alt="输入"/>
+      <img class="input" src="https://raw.githubusercontent.com/AwakeChloe/2019-hackweek/master/src/assets/input.png" alt="输入"/>
       <label for="inputName"></label><input id="inputName" placeholder="请输入用户昵称" v-model="msg"/>
       <div class="enter" @click="send"></div>
+      <transition name="register">
+        <img v-show="register" id="register" src="../assets/registered.png" alt="已注册"/>
+      </transition>
     </div>
   </transition>
 </template>
 
 <script>
+  import axios from 'axios'
+
   export default {
     name: 'input_name',
 
@@ -17,19 +22,29 @@
       return {
         msg: '',
         index: true,
-        audio: ''
+        register: false
       }
     },
 
     methods: {
       send: function () {
-        this.$http.post('/upload', {
-          name: this.msg
-        })
+        axios.post('http://localhost:5000/api/game_user', {
+          username: this.msg
+        },
+          {
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            }
+          })
           .then((res) => {
             console.log(res)
-            if (res.data.data.statu === 'ok') {
-              this.$emit('inputComplete')
+            if (res.data.success === '0') {
+              this.$emit('inputComplete', this.msg)
+            } else {
+              this.register = true
+              setTimeout(() => {
+                this.register = false
+              }, 1000)
             }
           })
           .catch(function (err) {
@@ -43,15 +58,31 @@
 
 <style scoped>
   .inputName-enter-active, .inputName-leave-active{
-    transition: opacity 1.5s;
+    transition: opacity 1.0s;
   }
 
   .inputName-enter, .inputName-leave-to /* .fade-leave-active below version 2.1.8 */ {
     opacity: 0;
   }
 
+  .register-enter-active, .register-leave-active{
+    transition: opacity 0.5s;
+  }
+
+  .register-enter, .register-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+  }
+
   #inputName::-webkit-input-placeholder {
     color: #cecece;
+  }
+
+  #register {
+    position: absolute;
+    left: 49%;
+    top: 15%;
+    width: 36%;
+    height: 80%;
   }
 
   #inputName {

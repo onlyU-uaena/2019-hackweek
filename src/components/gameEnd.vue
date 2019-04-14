@@ -19,7 +19,7 @@
 </script>
 <style scoped>
   .gameEnd-enter-active, .gameEnd-leave-active{
-    transition: opacity 1.5s;
+    transition: opacity 1.0s;
   }
 
   .gameEnd-enter, .gameEnd-leave-to /* .fade-leave-active below version 2.1.8 */ {

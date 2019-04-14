@@ -74,8 +74,7 @@
               '不过，这也是真的。运营，才不是没有灵魂的打字机，一条条出彩文案的背后，也许正藏着一个在潮流间冲浪,脑洞奇崛的追星女孩。',
             gameEnd: 8},
           {picturesSrc: 'http://wx1.sinaimg.cn/large/005JHgrHgy1g1xt790lsaj31120kuwpg.jpg',
-            plot: '你本来以为学姐们对姜文不太感冒，却没想到一位学姐翻出一张姜文抽着雪茄的照片：“我就说！怎么会有人不爱姜文这副作派呢？”于是，运营的例会变成了姜文的大型安利现场。\n' +
-              '有人喜欢正流行、也有的偏爱冷门。但对于运营们来说，只要发现了足够优质的内容，无论大众小众，都想诚挚安利给用户。'},
+            plot: '你本来以为学姐们对姜文不太感冒，却没想到一位学姐翻出一张姜文抽着雪茄的照片：“我就说！怎么会有人不爱姜文这副作派呢？”于是，运营的例会变成了姜文的大型安利现场。'},
           {picturesSrc: 'http://wx1.sinaimg.cn/large/005JHgrHgy1g1xt790lsaj31120kuwpg.jpg',
             plot: '你一说美队的名字，在座的漫威迷眼中都闪起了光亮，运营学长顺势提议：“我们要不要24号一起去看复联四？”于是，运营的第一次团建，就这样莫名其妙地定下来了。\n' +
               '有人说，社团只是为了综测分的牺牲，或是扩展人脉的平台......也许是这样的，但说话者，一定还没来得及认识家园工作室。在这里，有着比综测分更有意义的自我提升，有比人脉更动人的关系,我们称之为，同好。'},
@@ -193,14 +192,27 @@
   }
 
   .onlyPlot-enter-active {
-    transition: opacity 1.5s;
+    animation: bounce-in 1.0s;
+    transition: opacity 1.0s;
   }
 
   .onlyPlot-leave-active {
-    transition: opacity 1.5s;
+    transition: opacity 1.0s;
   }
-  .onlyPlot-enter, .onlyPlot-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  .onlyPlot-leave-to /* .fade-leave-active below version 2.1.8 */ {
     opacity: 0;
+  }
+
+  @keyframes bounce-in {
+    0% {
+      transform: scale(0);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+    100% {
+      transform: scale(1);
+    }
   }
 
   .Plot {

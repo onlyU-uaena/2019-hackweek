@@ -49,11 +49,11 @@
   }
 
   .discouraged-enter-active, .page2-enter-active {
-    transition: opacity 1.5s;
+    transition: opacity 1.0s;
   }
 
   .discouraged-leave-active, .page1-leave-active, .page2-leave-active {
-    transition: opacity 1.5s;
+    transition: opacity 1.0s;
   }
   .discouraged-enter, .page2-enter, .page2-leave-to, .page1-enter ,.page1-leave-to, .discouraged-leave-to {
     opacity: 0;

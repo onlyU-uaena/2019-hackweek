@@ -1,11 +1,9 @@
 <template>
   <transition name="model">
     <div v-show="show" class="background">
-      <div class="content">
-        <img id="enter" @click="choice" src="../assets/enter.png" alt="确认"/>
-        <img id="cancel" @click="close" src="../assets/cancel.png" alt="取消"/>
-        <img :src="picturesSrc[i]" class="modelContent" alt="模态框"/>
-      </div>
+      <img id="fullScreen" :src="picturesSrc[i]" alt="模态框"/>
+      <img @click="choice" src="../assets/enter.png" id="enter" alt="确认"/>
+      <img @click="close" src="../assets/cancel.png" id="cancel" alt="取消"/>
     </div>
   </transition>
 </template>
@@ -19,11 +17,11 @@
     data: function () {
       return {
         picturesSrc: [
-          '../../static/development.png',
-          '../../static/products.png',
-          '../../static/operation.png',
-          '../../static/administrative.png',
-          '../../static/design.png'
+          'http://wx4.sinaimg.cn/large/005JHgrHgy1g219dixdtwj31120ku44s.jpg',
+          'http://wx1.sinaimg.cn/large/005JHgrHgy1g219dhs1i9j31120kudm0.jpg',
+          'http://wx4.sinaimg.cn/large/005JHgrHgy1g219djegv0j31120kugru.jpg',
+          'http://wx4.sinaimg.cn/large/005JHgrHgy1g219di4dodj31120ku7aj.jpg',
+          'http://wx2.sinaimg.cn/large/005JHgrHgy1g219diln52j31120kugru.jpg'
         ]
       }
     },
@@ -50,24 +48,20 @@
     background-color: rgba(0, 0, 0, .5);
   }
 
-  .content {
-    height: 100%;
-  }
-
   #enter, #cancel {
     z-index: 100;
     position: absolute;
-    width: 5%;
-    height: 10%;
-    left: 75%;
-    top: 34%;
-    box-shadow: 2px 2px 3px #888888;
+    width: 40%;
+    height: 65%;
+    left: 60%;
+    top: 35.8%;
   }
 
   #cancel {
-    left: 65%;
-    width: 5.5%;
-    height: 10.5%;
+    top: 50%;
+    left: 0;
+    width: 40%;
+    height: 65%;
   }
 
   .modelContent {
@@ -80,7 +74,7 @@
   }
 
   .model-enter-active, .model-leave-active {
-    transition: opacity 1.5s;
+    transition: opacity 1.0s;
   }
 
   .model-enter, .model-leave-to /* .fade-leave-active below version 2.1.8 */ {

@@ -50,11 +50,11 @@
   }
 
   .firstPlot-enter-active {
-    transition: opacity 1.5s;
+    transition: opacity 1.0s;
   }
 
   .firstPlot-leave-active {
-    transition: opacity 1.5s;
+    transition: opacity 1.0s;
   }
 
   .firstPlot-enter, .firstPlot-leave-to /* .fade-leave-active below version 2.1.8 */ {

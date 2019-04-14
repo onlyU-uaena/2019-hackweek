@@ -1,9 +1,10 @@
 <template>
   <div id="app">
-    <div class="loading" v-if="loading !== 42">
-      <div v-bind:style="loadingStyle"></div>
-      <div>{{loadingProgress}}</div>
+    <div class="loading" v-if="loading !== 49">
+      <div class="loadingBar" v-bind:style="loadingStyle"></div>
     </div>
+    <div v-if="loading !== 49" class="loadingProgress">Loading {{loadingProgress}}</div>
+    <div class="lottie" v-if="loading !== 49"><lottie :options="defaultOptions"/></div>
     <input-name v-show="inputShow" @inputComplete="inputComplete"></input-name>
     <choice v-show="choicing" @choiceOccupational="choiceOccupational"></choice>
     <first-plot v-show="firstPlotShow" v-if="firstPlotIf" :i="i" @close="firstPlotClose"></first-plot>
@@ -11,7 +12,7 @@
     <plot v-if="plotIf" v-show="plotShow" :i="i" :progress="progress" :discouraged="discouraged" @discouraged="BeenDiscouraged" @gameEnd="gameEnd" @clickPlot="clickPlot"></plot>
     <discouraged v-show="discouragedShow"></discouraged>
     <game-end v-show="gameEndShow" @gameEnd="showPoint"></game-end>
-    <point v-show="pointShow"></point>
+    <point :userName="userName" :i="i" :gamePoint="gamePoint" v-if="pointShow" v-show="pointShow" @end="end"></point>
   </div>
 </template>
 
@@ -24,6 +25,7 @@
   import firstPlot from '../../components/first_plot'
   import gameEnd from '../../components/gameEnd'
   import point from '../../components/point'
+  import * as animationData from '../../assets/animation-w800-h600'
 
   export default {
     name: 'App',
@@ -44,7 +46,9 @@
         discouragedShow: false,
         discouraged: false,
         gameEndShow: false,
+        gamePoint: 0,
         pointShow: false,
+        userName: '',
         audio: '',
         pictures: [
           'page1',
@@ -88,7 +92,14 @@
           'page39',
           'page40',
           'page41',
-          'page42'
+          'page42',
+          'page43',
+          'page44',
+          'page45',
+          'page46',
+          'page47',
+          'page48',
+          'page49'
         ],
         picturesSrc: [
           'http://wx1.sinaimg.cn/large/005JHgrHgy1g1z08wclf2j31120kujt7.jpg',
@@ -132,14 +143,23 @@
           'http://wx3.sinaimg.cn/large/005JHgrHgy1g1whrgcoa8j31120kun0j.jpg',
           'http://wx3.sinaimg.cn/large/005JHgrHgy1g1whrg1ficj30qo0gs74m.jpg',
           'http://wx4.sinaimg.cn/large/005JHgrHgy1g1whrfn2dej31120kudll.jpg',
-          'http://wx3.sinaimg.cn/large/005JHgrHgy1g1u021veypj30lc0lct8u.jpg'
+          'http://wx3.sinaimg.cn/large/005JHgrHgy1g1u021veypj30lc0lct8u.jpg',
+          'https://raw.githubusercontent.com/AwakeChloe/2019-hackweek/master/src/assets/xiaojiayuan.png',
+          'https://raw.githubusercontent.com/AwakeChloe/2019-hackweek/master/src/assets/input.png',
+          'http://wx4.sinaimg.cn/large/005JHgrHgy1g219dixdtwj31120ku44s.jpg',
+          'http://wx1.sinaimg.cn/large/005JHgrHgy1g219dhs1i9j31120kudm0.jpg',
+          'http://wx4.sinaimg.cn/large/005JHgrHgy1g219djegv0j31120kugru.jpg',
+          'http://wx4.sinaimg.cn/large/005JHgrHgy1g219di4dodj31120ku7aj.jpg',
+          'http://wx2.sinaimg.cn/large/005JHgrHgy1g219diln52j31120kugru.jpg'
         ],
         loading: 0,
         progress: 0,
+        defaultOptions: {animationData: animationData},
+        animationSpeed: 1,
         loadingStyle: {
           width: 0,
-          height: '20px',
-          backgroundColor: 'yellow'
+          height: '8px',
+          backgroundColor: 'orange'
         },
         loadingProgress: 0
       }
@@ -147,10 +167,9 @@
 
     created:
       function () {
+        this.audio = document.createElement('audio')
+        this.audio.setAttribute('src', 'http://audio.xmcdn.com/group47/M03/1E/54/wKgKk1ubPLbgzAVMACD0qpSK364636.m4a')
         for (let i = 0; i < this.pictures.length; i++) {
-          this.audio = document.createElement('audio')
-          this.audio.setAttribute('src', 'http://cloud.mail.163.com/dfs/service/%E8%83%8C%E6%99%AF%E9%9F%B3%E4%B9%90.mp3?op=downloadFile&uid=5924b993eaf5c3bce6339e6050a85412@tencent.163.com&file=eyJzIjoiZnM6Y2xvdWRzdG9yYWdlLm1haWwuMTYzOjQ4NDM3NDg4OTYyNyIsInNmIjoiNDg1Njk0NzQxODM0OjQ4NDM3NDg4OTYyNyIsImkiOjg5MjY5MzQ5MDU5NzE3MDMsImNzIjp7InQiOjEsInYiOiIwMjE3MmE4YzQyYWZjM2NiMDc0NjA4NTZjOWIzMjc0ZCJ9LCJzeiI6MTA2NjQyNzEsImN0IjoxNTU0OTkwNzk0NzgzfQ&callback=http://wp.163.com:80/filehub/html/downloadCallback.jsp')
-          this.audio.play()
           this.pictures[i] = new Image()
           this.pictures[i].src = this.picturesSrc[i]
           let watching = setInterval(() => {
@@ -159,8 +178,9 @@
               this.loadingStyle.width = (this.loading / this.pictures.length) * 100 + '%'
               let progress = (this.loading / this.pictures.length) * 100
               this.loadingProgress = progress.toFixed(0) + '%'
-              if (this.loading === 42) {
+              if (this.loading === 49) {
                 this.inputShow = true
+                this.audio.play()
               }
               clearInterval(watching)
             }
@@ -176,14 +196,14 @@
         this.plotIf = true
         setTimeout(() => {
           this.firstPlotShow = true
-        }, 1500)
+        }, 1000)
         this.choicing = false
       },
 
       firstPlotClose: function () {
         setTimeout(() => {
           this.plotChoiceShow = true
-        }, 1500)
+        }, 1000)
         this.firstPlotShow = false
       },
 
@@ -192,10 +212,11 @@
         this.progress = progress
         setTimeout(() => {
           this.plotShow = true
-        }, 1500)
+        }, 1000)
       },
 
       checkDiscouraged: function (gamePoint) {
+        this.gamePoint = gamePoint
         if (gamePoint < 59) {
           this.discouraged = true
         }
@@ -207,7 +228,7 @@
         setTimeout(() => {
           this.discouragedShow = true
           this.plotIf = false
-        }, 1500)
+        }, 1000)
       },
 
       gameEnd: function () {
@@ -216,28 +237,33 @@
         setTimeout(() => {
           this.gameEndShow = true
           this.plotIf = false
-        }, 1500)
+        }, 1000)
+      },
+
+      end: function () {
+        this.pointShow = false
       },
 
       showPoint: function () {
         this.gameEndShow = false
         setTimeout(() => {
           this.pointShow = true
-        }, 1500)
+        }, 1000)
       },
 
       clickPlot: function () {
         this.plotShow = false
         setTimeout(() => {
           this.plotChoiceShow = true
-        }, 1500)
+        }, 1000)
       },
 
-      inputComplete: function () {
+      inputComplete: function (userName) {
         setTimeout(() => {
           this.choicing = true
-        }, 1500)
+        }, 1000)
         this.inputShow = false
+        this.userName = userName
       }
     }
 }
@@ -258,6 +284,13 @@
     margin: 0;
   }
 
+  .lottie {
+    position: absolute;
+    top: -10%;
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+
   #fullScreen {
     position: absolute;
     height: 100%;
@@ -270,8 +303,27 @@
   }
 
   .loading {
+    position: absolute;
     width: 50%;
-    height: 20%;
-    margin: 20% auto 0;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 12px;
+    background-color: #a9a7a6;
+  }
+
+  .loadingBar {
+    border-radius: 12px;
+    position: relative;
+  }
+
+  .loadingProgress {
+    position: absolute;
+    bottom: 30%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    font-family: monospace;
+    font-size: 28px;
+    font-weight: bold;
   }
 </style>
