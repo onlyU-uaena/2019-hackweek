@@ -50,7 +50,7 @@
           case 4: this.group = '设计'
             break
         }
-        axios.post('http://localhost:8000/api/ranking', {
+        axios.post('http://47.101.204.202:8000/api/ranking', {
           group: this.group,
           score: this.gamePoint,
           userName: this.userName
