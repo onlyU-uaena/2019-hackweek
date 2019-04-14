@@ -29,7 +29,7 @@
 
     methods: {
       send: function () {
-        axios.post('http://localhost:5000/api/game_user', {
+        axios.post('http://47.101.204.202:7000/api/game_user', {
           'username': this.msg
         },
           {
