@@ -2,7 +2,7 @@
   <transition name="choice">
     <div class="choice">
       <img id="fullScreen" src="http://wx4.sinaimg.cn/large/005JHgrHgy1g1yx2c9pskj31120kuthg.jpg" alt="背景"/>
-      <img src="https://raw.githubusercontent.com/AwakeChloe/2019-hackweek/master/src/assets/xiaojiayuan.png" id="move" alt="小家园" />
+      <img src="../assets/xiaojiayuan.png" id="move" alt="小家园" />
       <div id="button1" @click="openModel(0)"></div>
       <div id="button2" @click="openModel(1)"></div>
       <div id="button3" @click="openModel(2)"></div>

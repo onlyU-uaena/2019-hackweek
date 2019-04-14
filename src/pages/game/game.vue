@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-    <div class="loading" v-if="loading !== 49">
+    <div class="loading" v-if="loading !== 47">
       <div class="loadingBar" v-bind:style="loadingStyle"></div>
     </div>
-    <div v-if="loading !== 49" class="loadingProgress">Loading {{loadingProgress}}</div>
-    <div class="lottie" v-if="loading !== 49"><lottie :options="defaultOptions"/></div>
+    <div v-if="loading !== 47" class="loadingProgress">Loading {{loadingProgress}}</div>
+    <div class="lottie" v-if="loading !== 47"><lottie :options="defaultOptions"/></div>
     <input-name v-show="inputShow" @inputComplete="inputComplete"></input-name>
     <choice v-show="choicing" @choiceOccupational="choiceOccupational"></choice>
     <first-plot v-show="firstPlotShow" v-if="firstPlotIf" :i="i" @close="firstPlotClose"></first-plot>
@@ -99,7 +99,7 @@
           'page46',
           'page47',
           'page48',
-          'page49'
+          'page47'
         ],
         picturesSrc: [
           'http://wx1.sinaimg.cn/large/005JHgrHgy1g1z08wclf2j31120kujt7.jpg',
@@ -144,8 +144,6 @@
           'http://wx3.sinaimg.cn/large/005JHgrHgy1g1whrg1ficj30qo0gs74m.jpg',
           'http://wx4.sinaimg.cn/large/005JHgrHgy1g1whrfn2dej31120kudll.jpg',
           'http://wx3.sinaimg.cn/large/005JHgrHgy1g1u021veypj30lc0lct8u.jpg',
-          'https://raw.githubusercontent.com/AwakeChloe/2019-hackweek/master/src/assets/xiaojiayuan.png',
-          'https://raw.githubusercontent.com/AwakeChloe/2019-hackweek/master/src/assets/input.png',
           'http://wx4.sinaimg.cn/large/005JHgrHgy1g219dixdtwj31120ku44s.jpg',
           'http://wx1.sinaimg.cn/large/005JHgrHgy1g219dhs1i9j31120kudm0.jpg',
           'http://wx4.sinaimg.cn/large/005JHgrHgy1g219djegv0j31120kugru.jpg',
@@ -178,7 +176,7 @@
               this.loadingStyle.width = (this.loading / this.pictures.length) * 100 + '%'
               let progress = (this.loading / this.pictures.length) * 100
               this.loadingProgress = progress.toFixed(0) + '%'
-              if (this.loading === 49) {
+              if (this.loading === 47) {
                 this.inputShow = true
                 this.audio.play()
               }

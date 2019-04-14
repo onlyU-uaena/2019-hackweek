@@ -2,7 +2,7 @@
   <transition name="inputName">
     <div class="inputName">
       <img id="fullScreen" src="http://wx2.sinaimg.cn/large/005JHgrHgy1g1yoivwrdlj31120kuk3i.jpg" alt="背景"/>
-      <img class="input" src="https://raw.githubusercontent.com/AwakeChloe/2019-hackweek/master/src/assets/input.png" alt="输入"/>
+      <img class="input" src="../assets/input.png" alt="输入"/>
       <label for="inputName"></label><input id="inputName" placeholder="请输入用户昵称" v-model="msg"/>
       <div class="enter" @click="send"></div>
       <transition name="register">
@@ -29,7 +29,7 @@
     methods: {
       send: function () {
         axios.post('http://localhost:5000/api/game_user', {
-          username: this.msg
+          'username': this.msg
         },
           {
             headers: {
