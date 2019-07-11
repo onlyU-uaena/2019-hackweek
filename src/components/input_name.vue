@@ -29,6 +29,17 @@
 
     methods: {
       send: function () {
+        let self = document.getElementsByTagName('body')[0]
+        if (self.requestFullscreen) {
+// html5新增的全屏方法
+          self.requestFullscreen()
+        } else if (self.mozRequestFullScreen) {
+// 针对mozlia内核的hack
+          self.mozRequestFullScreen()
+        } else if (self.webkitRequestFullScreen) {
+// 针对webkit内核的hack
+          self.webkitRequestFullScreen()
+        }
         axios.post('http://47.101.204.202:7000/api/game_user', {
           'username': this.msg
         },

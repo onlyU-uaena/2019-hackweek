@@ -97,7 +97,7 @@
           'page44',
           'page45',
           'page46',
-          'page47',
+          'page47'
         ],
         picturesSrc: [
           'http://wx1.sinaimg.cn/large/005JHgrHgy1g1z08wclf2j31120kujt7.jpg',
